@@ -27,13 +27,17 @@ print('-' * 65)
 h = 0
 m = 0
 while True:
-    s = input('Введите количество секунд для подсчёта:\n\ts = ')
+    s = input('Введите количество секунд для подсчёта (не более суток):\n\ts = ')
     try:
         s = int(s)
-        while s <= 0:
+        if s <= 0:
             print('Вы ввели нереальные данные.\nБудте внимательны при следующем вводе числа.')
             print('\t', '.' * 20)
-            s = int(input('Введите количество секунд для подсчёта:\n\ts = '))
+            continue
+        elif s > 86400:
+            print('Вы ввели время более суток.\nПопробуйте новый ввод.')
+            print('\t', '.' * 20)
+            continue
         if 0 < s < 60:
             print('Введённое время состоит из:\n\thours =', h, '\n\tminutes =', m, '\n\tseconds =', s)
             print('Или временной формат: %02d:%02d:%02d' % (h, m, s))
@@ -49,8 +53,6 @@ while True:
             s2 = h2 % 60
             print('Введённое время состоит из:\n\thours =', h1, '\n\tminutes =', m2, '\n\tseconds =', s2)
             print('Или временной формат: %02d:%02d:%02d' % (h1, m2, s2))
-        elif s > 86400:
-            print('Вы ввели время более суток.\nА данный калькулятор не расчинан на такой период.')
         break
     except ValueError:
         print('Вы ввели некорректные данные.\nСосредоточтесь при новом вводе числа.')
@@ -146,7 +148,7 @@ if revenue > outgoings:
     profit_w = profit / workers
     profit_w1 = int(profit_w // 1)
     profit_w2 = int(profit_w % 1)
-    print('Прибыль в расчёте на одного сотругние составила: ',
+    print('Прибыль в расчёте на одного сотрудника составила: ',
           profit_w1, 'руб. %02d' % profit_w2, 'коп.')
 elif revenue < outgoings:
     losses = outgoings - revenue
